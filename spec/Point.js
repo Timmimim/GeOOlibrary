@@ -47,23 +47,23 @@ describe("Point", () => {
 
     it("should throw an error if the client tries to set anything else than a number", () => {
         expect(() => {
-            point01.setHorizontalValue(true)
+            point01.setHorizontalValue(true);
         }).toThrow(new TypeError("Given value -> true <- is not a number."));
         expect(() => {
-            point01.setHorizontalValue(false)
+            point01.setHorizontalValue(false);
         }).toThrow(new TypeError("Given value -> false <- is not a number."));
         expect(() => {
-            point01.setVerticalValue(true)
+            point01.setVerticalValue(true);
         }).toThrow(new TypeError("Given value -> true <- is not a number."));
         expect(() => {
-            point01.setVerticalValue(false)
+            point01.setVerticalValue(false);
         }).toThrow(new TypeError("Given value -> false <- is not a number."));
 
         expect(() => {
-            point01.setHorizontalValue("test")
+            point01.setHorizontalValue("test");
         }).toThrow(new TypeError("Given value -> test <- is not a number."));
         expect(() => {
-            point01.setVerticalValue("test")
+            point01.setVerticalValue("test");
         }).toThrow(new TypeError("Given value -> test <- is not a number."));
     });
 
