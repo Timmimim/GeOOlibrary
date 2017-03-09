@@ -1,2 +1,3 @@
-# GeOOlibrary
-This library offers Geoobjects with strict access control.
+# BasicFrontendSetup
+
+This repository serves as a default environment.
