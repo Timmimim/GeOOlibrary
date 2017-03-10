@@ -46,7 +46,7 @@ function Line2D() {
         let endPoint;
 
 
-        this.setStart = function(newStartPoint) {
+        this.setStart = newStartPoint => {
             if (isPoint2D(newStartPoint)) {
                 startPoint = newStartPoint;
             } else {
@@ -54,12 +54,12 @@ function Line2D() {
             }
         };
 
-        this.getStart = function() {
+        this.getStart = () => {
             return startPoint;
         };
 
 
-        this.setEnd = function(newEndPoint) {
+        this.setEnd = newEndPoint => {
             if (isPoint2D(newEndPoint)) {
                 endPoint = newEndPoint;
             } else {
@@ -67,12 +67,12 @@ function Line2D() {
             }
         };
 
-        this.getEnd = function() {
+        this.getEnd = () => {
             return endPoint;
         };
 
 
-        this.getGreatCircleLength_inMeter_ForLatitudeLongitude_PointValues = function() {
+        this.getGreatCircleLength_inMeter_ForLatitudeLongitude_PointValues = () => {
             const startPointHorizontalValue = degrees2radians(startPoint.getHorizontalValue());
             const endPointHorizontalValue = degrees2radians(endPoint.getHorizontalValue());
             const differenceHorizontalValuesEndStart = degrees2radians(endPoint.getHorizontalValue() - startPoint.getHorizontalValue());

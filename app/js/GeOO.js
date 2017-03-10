@@ -5,7 +5,7 @@ const GeOO = (() => {
         let coordinateReferenceSystem;
 
 
-        this.setHorizontalValue = function(newHorizontalValue) {
+        this.setHorizontalValue = newHorizontalValue => {
             if (newValueIsNumber(newHorizontalValue)) {
                 horizontalValue = newHorizontalValue;
             } else {
@@ -13,12 +13,12 @@ const GeOO = (() => {
             }
         };
 
-        this.getHorizontalValue = function() {
+        this.getHorizontalValue = () => {
             return horizontalValue;
         };
 
 
-        this.setVerticalValue = function(newVerticalValue) {
+        this.setVerticalValue = newVerticalValue => {
             if (newValueIsNumber(newVerticalValue)) {
                 verticalValue = newVerticalValue;
             } else {
@@ -26,16 +26,16 @@ const GeOO = (() => {
             }
         };
 
-        this.getVerticalValue = function() {
+        this.getVerticalValue = () => {
             return verticalValue;
         };
 
 
-        this.setCoordinateReferenceSystem = function(newCoordinateReferenceSystem) {
+        this.setCoordinateReferenceSystem = newCoordinateReferenceSystem =>  {
             coordinateReferenceSystem = newCoordinateReferenceSystem;
         };
 
-        this.getCoordinateReferenceSystem = function() {
+        this.getCoordinateReferenceSystem = () => {
             return coordinateReferenceSystem;
         };
     }
@@ -45,7 +45,7 @@ const GeOO = (() => {
         let endPoint;
 
 
-        this.setStart = function(newStartPoint) {
+        this.setStart = newStartPoint => {
             if (isPoint2D(newStartPoint)) {
                 startPoint = newStartPoint;
             } else {
@@ -53,12 +53,12 @@ const GeOO = (() => {
             }
         };
 
-        this.getStart = function() {
+        this.getStart = () => {
             return startPoint;
         };
 
 
-        this.setEnd = function(newEndPoint) {
+        this.setEnd = newEndPoint => {
             if (isPoint2D(newEndPoint)) {
                 endPoint = newEndPoint;
             } else {
@@ -66,12 +66,12 @@ const GeOO = (() => {
             }
         };
 
-        this.getEnd = function() {
+        this.getEnd = () => {
             return endPoint;
         };
 
 
-        this.getGreatCircleLength_inMeter_ForLatitudeLongitude_PointValues = function() {
+        this.getGreatCircleLength_inMeter_ForLatitudeLongitude_PointValues = () => {
             const startPointHorizontalValue = degrees2radians(startPoint.getHorizontalValue());
             const endPointHorizontalValue = degrees2radians(endPoint.getHorizontalValue());
             const differenceHorizontalValuesEndStart = degrees2radians(endPoint.getHorizontalValue() - startPoint.getHorizontalValue());
@@ -84,19 +84,23 @@ const GeOO = (() => {
     function Polyline2D() {
         let linesegments = [];
         
-        this.getPolyline = function() {
+        this.getPolyline = () => {
             
         };
         
-        this.setPolyline = function() {
+        this.setPolyline = () => {
             
         };
         
-        this.resetPolyline = function() {
+        this.resetPolyline = () => {
             
         };
         
-        this.addLinesegmentToEnd = function(...line2DSegment) {
+        this.addLinesegmentToEnd = (...line2DSegment) => {
+            
+        };
+        
+        this.getLength = () => {
             
         };
     }
@@ -156,7 +160,7 @@ const GeOO = (() => {
      */
 
     return {
-        newPoint2D: function(horizontalValue, verticalValue, coordinateReferenceSystem) {
+        newPoint2D: (horizontalValue, verticalValue, coordinateReferenceSystem) => {
             try {
                 return instanciatePoint2D(horizontalValue, verticalValue, coordinateReferenceSystem);
             } catch (error) {
@@ -164,7 +168,7 @@ const GeOO = (() => {
             }
         },
 
-        newLine2D: function(start, end) {
+        newLine2D: (start, end) => {
             try {
                 return instanciateLine2D(start, end);
             } catch (error) {
