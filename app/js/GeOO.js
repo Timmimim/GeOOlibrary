@@ -80,7 +80,11 @@ const GeOO = (() => {
             return calculateMeterDistanceForPointsWithRadianValues(startPointHorizontalValue, endPointHorizontalValue, differenceHorizontalValuesEndStart, differenceVerticalValuesEndStart);
         };
     }
-
+//*************************************************************************************************************************
+    function Polyline2D() {
+        let linesegments = [];
+        
+    }
 
     /*
      * Assertions
