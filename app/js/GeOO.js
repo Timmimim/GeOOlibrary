@@ -84,6 +84,21 @@ const GeOO = (() => {
     function Polyline2D() {
         let linesegments = [];
         
+        this.getPolyline = function() {
+            
+        };
+        
+        this.setPolyline = function() {
+            
+        };
+        
+        this.resetPolyline = function() {
+            
+        };
+        
+        this.addLinesegmentToEnd = function(...line2DSegment) {
+            
+        };
     }
 
     /*
