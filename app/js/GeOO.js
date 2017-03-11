@@ -31,7 +31,7 @@ const GeOO = (() => {
         };
 
 
-        this.setCoordinateReferenceSystem = newCoordinateReferenceSystem =>  {
+        this.setCoordinateReferenceSystem = newCoordinateReferenceSystem => {
             coordinateReferenceSystem = newCoordinateReferenceSystem;
         };
 
@@ -83,39 +83,64 @@ const GeOO = (() => {
 //*************************************************************************************************************************
     function Polyline2D() {
         let linesegments = [];
-        
-        this.getPolyline = () => {
-            
+
+        this.isEmpty = () => {
+            return linesegments.length <= 0;
         };
-        
-        this.setPolyline = () => {
-            
+
+        this.getSegmentAtPosition = position => {
+            if (validPositionInArray(position, linesegments)) {
+                return linesegments[position];
+            } else {
+                throw new RangeError("Requested position is not an index for a segment. Valid indexes are currently integers from the interval [0,+" + linesegments.length - 1 + "].");
+            }
         };
-        
-        this.resetPolyline = () => {
-            
+
+        this.getNumberOfSegments = () => {
+            return linesegments.length;
         };
-        
-        this.addLinesegmentToEnd = (...line2DSegment) => {
-            
+
+        this.reset = () => {
+            linesegments = [];
         };
-        
-        this.getLength = () => {
-            
+
+        this.addLinesegmentToEnd = line2DSegment => {
+            if (isLine2D(line2DSegment)) {
+                linesegments.push(line2DSegment);
+            } else {
+                throw new TypeError("Given value -> " + line2DSegment + " <- is not a Line2D.");
+            }
+        };
+
+
+        this.getGreatCircleLength_inMeter_ForLatitudeLongitude_PointValues = () => {
+            return linesegments.reduce((sumOfLength, lineLength) => sumOfLength + lineLength.getGreatCircleLength_inMeter_ForLatitudeLongitude_PointValues(), 0);
         };
     }
+
+    //*************************************************************************************************************************
 
     /*
      * Assertions
      */
 
     function newValueIsNumber(newValue) {
-        return (typeof newValue === "number") || false;
+        return (typeof newValue === "number");
     }
 
     function isPoint2D(newElement) {
-        return (newElement instanceof Point2D) || false;
+        return newElement instanceof Point2D;
     }
+
+    function validPositionInArray(position, array) {
+        return -1 < position && position < array.length;
+    }
+
+    function isLine2D(newElement) {
+        return newElement instanceof Line2D;
+    }
+
+
 
 
     /*
@@ -131,7 +156,7 @@ const GeOO = (() => {
         const EarthRadiusInMeters = 6371000;
         try {
             const a = squareOfHalfTheChordLengthBetweenThePoints(startPointHorizontalValue, endPointHorizontalValue, differenceHorizontalValuesEndStart, differenceVerticalValuesEndStart);
-            const b = angularDistanceInRadians(a); 
+            const b = angularDistanceInRadians(a);
             const distanceInMeter = b * EarthRadiusInMeters;
             return Math.round(distanceInMeter, -1); // Rounding to km with two decimalplaces.   
         } catch (error) {
@@ -174,6 +199,17 @@ const GeOO = (() => {
             } catch (error) {
                 throw error;
             }
+        },
+
+        newPolyline2D: (...lines2D) => {
+            try {
+                // If first argument is an Array. Only this onle with its content will be processed. Otherwisw all commaseperated arguments.
+                let result = lines2D[0] instanceof Array ? instanciatePolyline2DwithArray(lines2D[0]) : instanciatePolyline2DwithArray(lines2D);
+                return result;
+            } catch (error) {
+                throw error;
+            }
+
         }
     };
 
@@ -201,6 +237,19 @@ const GeOO = (() => {
         } catch (error) {
             throw error;
         }
+    }
+
+    function instanciatePolyline2DwithArray(lines2D) {
+        try {
+            let polyline = new Polyline2D();
+            lines2D.forEach(line => {
+                polyline.addLinesegmentToEnd(line);
+            });
+            return polyline;
+        } catch (error) {
+            throw error;
+        }
+
     }
 
 });
